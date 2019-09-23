@@ -1,4 +1,5 @@
 Simple Mobile Phone:
+
 program options:
   1. Print list of contacts
   2. Add new contact
