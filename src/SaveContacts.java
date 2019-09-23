@@ -1,29 +1,26 @@
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class SaveContacts {
 
-   private static ArrayList<Contacts> contactsOfList;
-   private static int counter = 0;
+   private ArrayList<Contacts> contactsOfList;
+   private int counter = 0;
    private FileWriter writerFile;
 
    public SaveContacts() {
        try {
-           writerFile = new FileWriter("saveContacts.txt");
+               writerFile = new FileWriter("saveContacts.txt");
+               writerFile.write("actual list of contacts: \n");
        } catch (IOException e) {
            e.printStackTrace();
        }
    }
 
-    public static void addCounter(int counter) {
-        SaveContacts.counter += counter;
+    public void addCounter(int counter) {
+        this.counter += counter;
     }
 
-    public static void subTractCounter(int counter) {
-        SaveContacts.counter += counter;
-    }
 
    public void finishSaveContacts(ArrayList<Contacts> list) {
 
@@ -32,11 +29,11 @@ public class SaveContacts {
        for(Contacts contact : contactsOfList) {
            try {
                writerFile.write( (count++) + " .Name: " + contact.getName() + ", number phone: " + contact.getNumberPhone() + "\n" );
+               addCounter(1);
            } catch (IOException e) {
                e.printStackTrace();
            }
        }
-
 
         if(writerFile != null) {
             try {

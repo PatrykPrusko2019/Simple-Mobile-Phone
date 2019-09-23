@@ -1,5 +1,4 @@
-1 .Name: bubu, number phone: 5314535
-2 .Name: vghgjk, number phone: 521456
-3 .Name: bgfdtyjk, number phone: 5965
-4 .Name: fdresrdf;lk,, number phone: 14886
-5 .Name: 6, number phone: 6
+actual list of contacts: 
+1 .Name: Patrik, number phone: 432455555
+2 .Name: Pati, number phone: 1233211321
+3 .Name: ALicja, number phone: 3213213

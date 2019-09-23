@@ -5,6 +5,8 @@ public class AddRemoveUpdateSearchContact extends MobilePhone {
 
 
     public void addNewContact(ArrayList<Contacts> listContacts) {
+
+        System.out.println("********** add contact *************");
         boolean corectName;
         String name;
 
@@ -13,7 +15,8 @@ public class AddRemoveUpdateSearchContact extends MobilePhone {
             System.out.println("enter the name contact: ");
             name = sc.nextLine();
 
-            if(name.equals("")) { corectName = false; } //no null value of String
+            if(name.equals("")) { corectName = false;
+            System.out.println("error, empty field, please again ..."); } //no null value of String
 
 
         } while ( ! isTrueOfFalse(corectName));//if true -> go out loop
@@ -22,7 +25,7 @@ public class AddRemoveUpdateSearchContact extends MobilePhone {
         do {
             System.out.println("enter the phone number: ");
             ifInt = sc.hasNextLong();
-            if(ifInt == false) { sc.nextLine(); }
+            if(ifInt == false) { sc.nextLine();}
 
         } while ( ! isTrueOfFalse(ifInt)); //if true -> go out loop
 
@@ -35,10 +38,11 @@ public class AddRemoveUpdateSearchContact extends MobilePhone {
         //if false add new contact
         if( ! ifAddContact) {
             Contacts contacts = new Contacts(name, phoneNumber);
-            SaveContacts.addCounter(1);
             listContacts.add(contacts);
             setListContacts(listContacts);
             System.out.println("adding a new contact to the list ");
+        } else {
+            System.out.println("the contact cannot be added...");
         }
 
     }
@@ -51,25 +55,24 @@ public class AddRemoveUpdateSearchContact extends MobilePhone {
 
         if(listContacts.isEmpty()) {
             flag = true;
-            System.out.println("the list is empty, there is no possibility of modification ... ");
+            System.out.println("the list is empty, there is no possibility of remove contact ... ");
         }
 
         boolean ifInt;
-        while(! flag) { //if false go work do it !!!
+        while(! flag) { //if false go do it !!!
 
             printListOfContacts();
-            System.out.println("choose contact: ");
+            System.out.println("choose contact by number: ");
             ifInt = sc.hasNextInt();
 
             if(ifInt) {
                 chooseContact = sc.nextInt();
                 sc.nextLine();
-
-                if(chooseContact > 0 && chooseContact <= listContacts.size()) {
-                    listContacts.remove(chooseContact - 1);//delete contact
+                chooseContact--;
+                if(chooseContact > -1 && chooseContact < listContacts.size()) {
+                    listContacts.remove(chooseContact);//delete contact
                     setListContacts(listContacts);
                     System.out.println("delete contact ");
-                    SaveContacts.subTractCounter(1);
                     flag = true;
                 } else {
                     System.out.println("wrong number contact ... please again");
@@ -85,20 +88,20 @@ public class AddRemoveUpdateSearchContact extends MobilePhone {
     }
 
     public void searchContact(ArrayList<Contacts> listContacts) {
-        System.out.println("********* search contacts");
+        System.out.println("********** search contacts **********");
         boolean flag = false;
         int choose;
         boolean ifInt;
 
         if(listContacts.isEmpty()) {
             flag = true;
-            System.out.println("the list is empty, there is no possibility of modification ... ");
+            System.out.println("the list is empty, there is no possibility of search contact ... ");
+        } else {
+            printListOfContacts();
         }
 
-        printListOfContacts();
-
         while(! flag) {
-            System.out.println("search by:\n1. name\n2. number \n3. Return\n enter the value: ");
+            System.out.println("search by:\n1. name\n2. number phone \n3. exit \n enter the value: ");
 
             ifInt = sc.hasNextInt();
             if(ifInt) {
@@ -120,11 +123,14 @@ public class AddRemoveUpdateSearchContact extends MobilePhone {
                         flag = true; //return
                         break;
                     }
+                    default: {
+                        System.out.println("wrong number of range 1 - 3");
+                    }
                 }
             } else {
                 sc.nextLine();
+                System.out.println("wrong value ...");
             }
-
 
         }
 
@@ -133,28 +139,29 @@ public class AddRemoveUpdateSearchContact extends MobilePhone {
     public void updateExistingContact(ArrayList<Contacts> listContacts) {
         System.out.println("************* modify contacts ***************");
 
-        printListOfContacts();
         boolean flag = true, ifInt;
         int chooseContact;
 
         if(listContacts.isEmpty()) {
             flag = false;
             System.out.println("the list is empty, there is no possibility of modification ... ");
+        } else {
+            printListOfContacts();
         }
 
         while (flag) {
-            System.out.println("select the contact to modify: ");
+            System.out.println("select the contact to modify by number: ");
             ifInt = sc.hasNextInt();
 
             if( ifInt ) { //if true -> int value !!!
 
                 chooseContact = sc.nextInt();
                 sc.nextLine();
+                chooseContact--;
+                if( chooseContact > -1 && chooseContact < listContacts.size() ) {
 
-                if( chooseContact > 0 || chooseContact <= listContacts.size() ) {
-
-                    modifyContact(chooseContact-1); //change contact
-                    flag = false; //aby wyjsc z petli
+                    modifyContact(chooseContact); //change contact
+                    flag = false;
 
                 } else {
                     System.out.println("wrong value of contacts ...");

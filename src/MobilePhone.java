@@ -3,8 +3,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 
-//klasa glowna/ bazowa
-//ArrayList comtacts
 public class MobilePhone {
 
     private SaveContacts saveContacts;
@@ -72,7 +70,7 @@ public class MobilePhone {
                     case 7:
                     {
                         isQuit = true;
-                        System.out.println("good bye my master !!!");
+                        System.out.println("exits from program !!!");
                             saveContacts.finishSaveContacts(listContacts);
 
                         break;
@@ -112,6 +110,9 @@ public class MobilePhone {
             } else {
                 System.out.println("no contact by phone number");
             }
+        } else {
+            sc.nextLine();
+            System.out.println("wrong value ...");
         }
     }
 
@@ -125,6 +126,7 @@ public class MobilePhone {
 
             if (name.equals("")) {
                 result = false;
+                System.out.println("error, empty field, please again ...");
             }
         }while( ! result);
 
